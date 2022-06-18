@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.LobbyController">
+   <children>
+      <Label fx:id="lbl_titulo" layoutX="233.0" layoutY="58.0" text="LOBBY" AnchorPane.leftAnchor="233.0" AnchorPane.rightAnchor="232.33333333333334" AnchorPane.topAnchor="58.0">
+         <font>
+            <Font name="Arial Black" size="48.0" />
+         </font>
+      </Label>
+      <TableView layoutX="96.0" layoutY="176.0" prefHeight="200.0" prefWidth="457.0" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="95.99999999999994" AnchorPane.rightAnchor="96.66666666666669" AnchorPane.topAnchor="176.0">
+        <columns>
+          <TableColumn fx:id="tbl_nome" prefWidth="133.3332977294922" text="NOME" />
+          <TableColumn fx:id="tbl_cor" prefWidth="104.0" text="COR" />
+            <TableColumn fx:id="tbl_rondasGanhas" prefWidth="125.3333740234375" text="RONDAS GANHAS" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>
