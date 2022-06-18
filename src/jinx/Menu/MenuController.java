@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jinx;
+package jinx.Menu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,24 +12,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author fraba
  */
-public class LobbyController implements Initializable {
+public class MenuController implements Initializable {
 
     @FXML
     private Label lbl_titulo;
     @FXML
-    private TableColumn<?, ?> tbl_nome;
+    private Button btn_entrarJogo;
     @FXML
-    private TableColumn<?, ?> tbl_cor;
+    private Button btn_instrucoes;
     @FXML
-    private TableColumn<?, ?> tbl_rondasGanhas;
+    private Button btn_sair;
 
     /**
      * Initializes the controller class.
@@ -39,5 +37,16 @@ public class LobbyController implements Initializable {
         // TODO
     }    
 
+    @FXML
+    private void abrirJogo(ActionEvent event) {
+    }
+
+    @FXML
+    private void abrirInstrucoes(ActionEvent event) {
+    }
+
+    @FXML
+    private void sair(ActionEvent event) {
+    }
     
 }

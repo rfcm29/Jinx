@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jinx;
+package jinx.Instrucoes;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,29 +12,32 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 /**
+ * FXML Controller class
  *
- * @author rfcm2
+ * @author fraba
  */
-public class FXMLDocumentController implements Initializable {
-    
+public class InstrucoesController implements Initializable {
+
     @FXML
-    private Label label;
+    private Label lbl_titulo;
     @FXML
-    private Button button;
+    private Text txt_instrucoes;
     @FXML
-    private Button teste;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    private Button btn_voltar;
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void voltarMenu(ActionEvent event) {
+    }
     
 }
