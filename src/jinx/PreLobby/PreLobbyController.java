@@ -27,6 +27,10 @@ public class PreLobbyController implements Initializable {
     private TextField txt_nome;
     @FXML
     private Button btn_entrarJogo;
+    @FXML
+    private TextField txt_ip;
+    @FXML
+    private TextField txt_porta;
 
     /**
      * Initializes the controller class.

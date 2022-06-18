@@ -28,8 +28,6 @@ public class LobbyController implements Initializable {
     private TableColumn<?, ?> tbl_nome;
     @FXML
     private TableColumn<?, ?> tbl_cor;
-    @FXML
-    private TableColumn<?, ?> tbl_rondasGanhas;
 
     /**
      * Initializes the controller class.
