@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Lobby.LobbyController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Lobby.LobbyController">
    <children>
-      <Label fx:id="lbl_titulo" layoutX="233.0" layoutY="58.0" text="LOBBY" AnchorPane.leftAnchor="233.0" AnchorPane.rightAnchor="232.33333333333334" AnchorPane.topAnchor="58.0">
+      <Label fx:id="lbl_titulo" alignment="CENTER" layoutX="233.0" layoutY="58.0" text="LOBBY" AnchorPane.leftAnchor="233.0" AnchorPane.rightAnchor="232.33333333333334" AnchorPane.topAnchor="58.0">
          <font>
             <Font name="Arial Black" size="48.0" />
          </font>
