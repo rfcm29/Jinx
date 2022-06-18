@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
 /**
@@ -20,16 +19,14 @@ import javafx.scene.control.TextField;
  *
  * @author fraba
  */
-public class LobbyController implements Initializable {
+public class PreLobbyController implements Initializable {
 
     @FXML
     private Label lbl_titulo;
     @FXML
-    private TableColumn<?, ?> tbl_nome;
+    private TextField txt_nome;
     @FXML
-    private TableColumn<?, ?> tbl_cor;
-    @FXML
-    private TableColumn<?, ?> tbl_rondasGanhas;
+    private Button btn_entrarJogo;
 
     /**
      * Initializes the controller class.
@@ -39,5 +36,8 @@ public class LobbyController implements Initializable {
         // TODO
     }    
 
+    @FXML
+    private void entrarJogo(ActionEvent event) {
+    }
     
 }
