@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #b666e8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Menu.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #b666e8;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Menu.MenuController">
     <children>
       <Label fx:id="lbl_titulo" layoutX="228.0" layoutY="91.0" text="JINX" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="229.33333333333334" AnchorPane.topAnchor="91.0">
          <font>
             <Font name="Arial Black" size="72.0" />
          </font>
       </Label>
-        <Button fx:id="btn_entrarJogo" layoutX="201.0" layoutY="242.0" onAction="#abrirJogo" style="-fx-background-color: #000000;" text="ENTRAR NO JOGO" textFill="#e9d1f8" AnchorPane.bottomAnchor="218.0" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="200.33333333333337">
+        <Button layoutX="201.0" layoutY="242.0" onAction="#abrirJogo" style="-fx-background-color: #000000;" text="ENTRAR NO JOGO" textFill="#e9d1f8" AnchorPane.bottomAnchor="218.0" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="200.33333333333337">
          <font>
             <Font name="Arial" size="24.0" />
          </font></Button>

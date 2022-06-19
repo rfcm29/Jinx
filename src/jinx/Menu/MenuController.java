@@ -5,6 +5,7 @@
  */
 package jinx.Menu;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,8 +31,6 @@ public class MenuController implements Initializable {
     @FXML
     private Label lbl_titulo;
     @FXML
-    private Button btn_entrarJogo;
-    @FXML
     private Button btn_instrucoes;
     @FXML
     private Button btn_sair;
@@ -46,7 +45,8 @@ public class MenuController implements Initializable {
 
     @FXML
     private void abrirJogo(ActionEvent event) throws IOException {
-        Parent preLobby = FXMLLoader.load(getClass().getResource("PreLobby/PreLobby.fxml"));
+        URL url = new File("src/jinx/PreLobby/PreLobby.fxml").toURI().toURL();
+        Parent preLobby = FXMLLoader.load(url);
         
         Scene scenePreLobby = new Scene(preLobby);
         
@@ -57,7 +57,8 @@ public class MenuController implements Initializable {
 
     @FXML
     private void abrirInstrucoes(ActionEvent event) throws IOException {
-        Parent instrucoes = FXMLLoader.load(getClass().getResource("Instrucoes/Instrucoes.fxml"));
+        URL url = new File("src/jinx/Instrucoes/Instrucoes.fxml").toURI().toURL();
+        Parent instrucoes = FXMLLoader.load(url);
         
         Scene sceneInstrucoes = new Scene(instrucoes);
         
