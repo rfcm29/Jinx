@@ -5,6 +5,7 @@
  */
 package jinx.Instrucoes;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +45,10 @@ public class InstrucoesController implements Initializable {
 
     @FXML
     private void voltarMenu(ActionEvent event) throws IOException {
-        Parent menu = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
+        //Parent menu = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
+        
+        URL url = new File("src/jinx/Menu/Menu.fxml").toURI().toURL();
+        Parent menu = FXMLLoader.load(url);
         
         Scene sceneMenu = new Scene(menu);
         

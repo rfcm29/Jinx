@@ -12,11 +12,11 @@
             <Font name="Arial Black" size="72.0" />
          </font>
       </Label>
-        <Button fx:id="btn_entrarJogo" layoutX="254.0" layoutY="364.6666666666667" onAction="#abrirJogo" prefHeight="43.0" prefWidth="289.0" style="-fx-background-color: #000000;" text="ENTRAR NO JOGO" textFill="#e9d1f8" AnchorPane.bottomAnchor="192.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="257.0">
+        <Button layoutX="255.0" layoutY="362.6666666666667" onAction="#abrirJogo" prefHeight="43.0" prefWidth="289.0" style="-fx-background-color: #000000;" text="ENTRAR NO JOGO" textFill="#e9d1f8" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="256.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font></Button>
-      <Button fx:id="btn_instrucoes" layoutX="253.0" layoutY="300.0" mnemonicParsing="false" onAction="#abrirInstrucoes" prefHeight="43.0" prefWidth="289.0" style="-fx-background-color: #000000;" text="COMO JOGAR" textFill="#e9d1f8" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="300.0">
+      <Button fx:id="btn_instrucoes" layoutX="253.0" layoutY="300.0" mnemonicParsing="false" onAction="#abrirInstrucoes" prefHeight="43.0" prefWidth="289.0" style="-fx-background-color: #000000;" text="COMO JOGAR" textFill="#e9d1f8" AnchorPane.bottomAnchor="257.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="258.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font></Button>
