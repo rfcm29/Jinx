@@ -5,22 +5,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #b666e8;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Menu.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #b666e8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Menu.MenuController">
     <children>
-      <Label fx:id="lbl_titulo" layoutX="228.0" layoutY="91.0" text="JINX" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="229.33333333333334" AnchorPane.topAnchor="91.0">
+      <Label fx:id="lbl_titulo" alignment="CENTER" layoutX="228.0" layoutY="91.0" text="JINX" textFill="#e9d1f8" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="229.33333333333334" AnchorPane.topAnchor="91.0">
          <font>
             <Font name="Arial Black" size="72.0" />
          </font>
       </Label>
-        <Button layoutX="201.0" layoutY="242.0" onAction="#abrirJogo" style="-fx-background-color: #000000;" text="ENTRAR NO JOGO" textFill="#e9d1f8" AnchorPane.bottomAnchor="218.0" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="200.33333333333337">
+        <Button layoutX="255.0" layoutY="362.6666666666667" onAction="#abrirJogo" prefHeight="43.0" prefWidth="289.0" style="-fx-background-color: #000000;" text="ENTRAR NO JOGO" textFill="#e9d1f8" AnchorPane.bottomAnchor="194.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="256.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font></Button>
-      <Button fx:id="btn_instrucoes" layoutX="227.0" layoutY="295.0" mnemonicParsing="false" onAction="#abrirInstrucoes" style="-fx-background-color: #000000;" text="COMO JOGAR" textFill="#e9d1f8" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="226.33333333333334" AnchorPane.topAnchor="295.0">
+      <Button fx:id="btn_instrucoes" layoutX="253.0" layoutY="300.0" mnemonicParsing="false" onAction="#abrirInstrucoes" prefHeight="43.0" prefWidth="289.0" style="-fx-background-color: #000000;" text="COMO JOGAR" textFill="#e9d1f8" AnchorPane.bottomAnchor="257.0" AnchorPane.leftAnchor="253.0" AnchorPane.rightAnchor="258.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font></Button>
-      <Button fx:id="btn_sair" layoutX="256.0" layoutY="351.0" mnemonicParsing="false" onAction="#sair" style="-fx-background-color: #000000;" text="SAIR" textFill="#e9d1f8" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="351.0">
+      <Button fx:id="btn_sair" layoutX="256.0" layoutY="431.0" mnemonicParsing="false" onAction="#sair" style="-fx-background-color: #000000;" text="SAIR" textFill="#e9d1f8" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="431.0">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
