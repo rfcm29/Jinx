@@ -42,6 +42,8 @@ public class JogoController implements Initializable {
     private Label lbl_dado1;
     @FXML
     private Label lbl_dado2;
+    @FXML
+    private Button btn_comecaJogo;
 
     /**
      * Initializes the controller class.
@@ -53,6 +55,10 @@ public class JogoController implements Initializable {
 
     @FXML
     private void lancarDados(ActionEvent event) {
+    }
+
+    @FXML
+    private void comecaJogo(ActionEvent event) {
     }
     
 }

@@ -59,5 +59,10 @@
             <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
          </padding>
       </Label>
+      <Button fx:id="btn_comecaJogo" layoutX="183.0" layoutY="503.0" mnemonicParsing="false" onAction="#comecaJogo" style="-fx-background-color: #000000;" text="COMEÇAR JOGO" textFill="#e9d1f8">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
