@@ -6,20 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.PreLobby.PreLobbyController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.PreLobby.PreLobbyController">
    <children>
-      <Label fx:id="lbl_titulo" layoutX="81.0" layoutY="59.0" prefHeight="71.0" prefWidth="489.0" text="ENTRAR NO JOGO" textAlignment="CENTER" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="59.0">
+      <Label fx:id="lbl_titulo" alignment="CENTER" layoutX="81.0" layoutY="59.0" prefHeight="71.0" prefWidth="489.0" text="ENTRAR NO JOGO" textAlignment="CENTER" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="59.0">
          <font>
             <Font name="Arial Black" size="48.0" />
          </font>
       </Label>
-      <TextField fx:id="txt_nome" alignment="CENTER" layoutX="179.0" layoutY="212.0" prefHeight="25.0" prefWidth="291.0" promptText="NOME" AnchorPane.bottomAnchor="262.6666666666667" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="179.66666666666669" />
+      <TextField fx:id="txt_nome" alignment="CENTER" layoutX="180.0" layoutY="251.0" prefHeight="25.0" prefWidth="291.0" promptText="NOME" AnchorPane.bottomAnchor="323.6666666666667" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="178.66666666666674" AnchorPane.topAnchor="250.99999999999997" />
       <Button fx:id="btn_entrarJogo" layoutX="262.0" layoutY="344.0" mnemonicParsing="false" onAction="#entrarJogo" prefHeight="43.0" prefWidth="126.0" style="-fx-background-color: #000000;" text="ENTRAR" textFill="#e9d1f8" AnchorPane.bottomAnchor="112.66666666666669" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="262.0">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="txt_ip" alignment="CENTER" layoutX="179.0" layoutY="250.0" prefHeight="25.0" prefWidth="291.0" promptText="IP" />
-      <TextField fx:id="txt_porta" alignment="CENTER" layoutX="179.0" layoutY="290.0" prefHeight="25.0" prefWidth="291.0" promptText="PORTA" />
+      <TextField fx:id="txt_ip" alignment="CENTER" layoutX="182.0" layoutY="293.0" prefHeight="25.0" prefWidth="441.0" promptText="IP" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="182.0" AnchorPane.rightAnchor="177.0" AnchorPane.topAnchor="293.0" />
+      <TextField fx:id="txt_porta" alignment="CENTER" layoutX="182.0" layoutY="334.0" prefHeight="25.0" prefWidth="441.0" promptText="PORTA" AnchorPane.bottomAnchor="240.66666666666669" AnchorPane.leftAnchor="182.0" AnchorPane.rightAnchor="176.66666666666674" AnchorPane.topAnchor="334.0" />
    </children>
 </AnchorPane>
