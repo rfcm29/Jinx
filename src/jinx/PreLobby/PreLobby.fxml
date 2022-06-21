@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.PreLobby.PreLobbyController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.PreLobby.PreLobbyController">
    <children>
       <Label fx:id="lbl_titulo" alignment="CENTER" layoutX="81.0" layoutY="59.0" prefHeight="71.0" prefWidth="489.0" text="ENTRAR NO JOGO" textAlignment="CENTER" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="59.0">
          <font>

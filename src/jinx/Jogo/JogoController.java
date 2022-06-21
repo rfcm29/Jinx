@@ -7,6 +7,7 @@ package jinx.Jogo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
+import jinx.Client.Client;
 
 /**
  * FXML Controller class
@@ -22,6 +24,10 @@ import javafx.scene.image.ImageView;
  */
 public class JogoController implements Initializable {
 
+    private Client client;
+    private String ip;
+    private int porta;
+    
     @FXML
     private ImageView img_tabuleiro;
     @FXML
@@ -50,7 +56,9 @@ public class JogoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        new Thread(()-> {
+            client = new Client(ip, porta);
+        }).start();
     }    
 
     @FXML
@@ -59,6 +67,12 @@ public class JogoController implements Initializable {
 
     @FXML
     private void comecaJogo(ActionEvent event) {
+      
+    }
+  
+    public void setValues(String ip, int porta) {
+        this.ip = ip;
+        this.porta = porta;
     }
     
 }

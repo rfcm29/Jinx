@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #b666e8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Menu.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #b666e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Menu.MenuController">
     <children>
       <Label fx:id="lbl_titulo" alignment="CENTER" layoutX="228.0" layoutY="91.0" text="JINX" textFill="#e9d1f8" AnchorPane.leftAnchor="228.0" AnchorPane.rightAnchor="229.33333333333334" AnchorPane.topAnchor="91.0">
          <font>

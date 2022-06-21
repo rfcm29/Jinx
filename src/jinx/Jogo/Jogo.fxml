@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: e9d1f8;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jinx.Jogo.JogoController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: e9d1f8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="jinx.Jogo.JogoController">
    <children>
       <ImageView fx:id="img_tabuleiro" fitHeight="302.0" fitWidth="279.0" layoutX="93.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="93.0">
          <image>

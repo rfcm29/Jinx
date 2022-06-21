@@ -5,6 +5,8 @@
  */
 package jinx;
 
+import java.io.File;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +21,8 @@ public class Jinx extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
+        URL url = new File("src/jinx/Menu/Menu.fxml").toURI().toURL();
+        Parent root = FXMLLoader.load(url);
         
         Scene scene = new Scene(root);
         
