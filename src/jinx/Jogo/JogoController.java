@@ -5,9 +5,13 @@
  */
 package jinx.Jogo;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.application.Platform;
+import java.util.ArrayList;
+import java.util.ResourceBundle; 
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import jinx.Client.Client;
+import jinx.Server.ClientHandler;
+import jinx.Server.Jogo.Movimento;
 
 /**
  * FXML Controller class
@@ -25,8 +31,12 @@ import jinx.Client.Client;
 public class JogoController implements Initializable {
 
     private Client client;
-    private String ip;
-    private int porta;
+    
+    private Thread readObj;
+    
+    private Object object;
+    
+    private int ID;
     
     @FXML
     private ImageView img_tabuleiro;
@@ -56,23 +66,69 @@ public class JogoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        new Thread(()-> {
-            client = new Client(ip, porta);
-        }).start();
+        
     }    
 
     @FXML
     private void lancarDados(ActionEvent event) {
+        
     }
 
     @FXML
     private void comecaJogo(ActionEvent event) {
-      
+        client.sendToServer("game#start");
     }
   
-    public void setValues(String ip, int porta) {
-        this.ip = ip;
-        this.porta = porta;
+    public void setValues(String ip, int porta, String nome) throws IOException {
+        client = new Client(ip, porta);
+        startReadObj();
+        client.sendToServer("nome#" + nome);
+    }
+
+    private void startReadObj() {
+        readObj = new Thread(() -> {
+            while(true){
+                try {
+                object = client.getObjIn().readObject();
+                if(object instanceof String){
+                    readString(object);
+                } else if(object instanceof ArrayList) {
+                    atualizaJogadores((ArrayList<ClientHandler>) object);
+                } else if(object instanceof Movimento){
+                    desenhaTabuleiro((Movimento) object);
+                }
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(JogoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        readObj.start();
     }
     
+    private void readString(Object object){
+        StringTokenizer st = new StringTokenizer((String) object, "#");
+        String comando = st.nextToken();
+        String acao = st.nextToken();
+        
+        switch(comando){
+            case "id":
+                ID = Integer.parseInt(acao);
+                System.out.println("ID: " + ID);
+                break;
+            case "game":
+                if("start".equals(acao)){
+                    System.out.println("comecar jogo");
+                    btn_comecaJogo.setVisible(false);
+                }
+        }
+    }
+
+    private void desenhaTabuleiro(Movimento movimento) {
+        System.out.println(movimento.mensagem);
+    }
+
+    private void atualizaJogadores(ArrayList<ClientHandler> jogadores) {
+        
+        System.out.println("atualiza jogadores");
+    }
 }
