@@ -42,6 +42,8 @@ public class PreLobbyController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,13 +51,13 @@ public class PreLobbyController implements Initializable {
     }    
 
     @FXML
-    private void entrarJogo(ActionEvent event) throws IOException {
+    private void entrarJogo(ActionEvent event) throws IOException, InterruptedException {
         URL url = new File("src/jinx/Jogo/Jogo.fxml").toURI().toURL();
         FXMLLoader fxmlloader = new FXMLLoader(url);
         Parent preLobby = (Parent)fxmlloader.load();
         
         JogoController controller = fxmlloader.<JogoController>getController();
-        controller.setValues(txt_ip.getText(), Integer.parseInt(txt_porta.getText()));
+        controller.setValues(txt_ip.getText(), Integer.parseInt(txt_porta.getText()), txt_nome.getText());
 
         Scene scenePreLobby = new Scene(preLobby);
 
