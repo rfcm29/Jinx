@@ -5,6 +5,7 @@
  */
 package jinx.Jogo;
 
+import static java.lang.String.valueOf;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import jinx.Client.Client;
 import jinx.Server.ClientHandler;
 import jinx.Server.Jogo.Movimento;
@@ -60,22 +65,40 @@ public class JogoController implements Initializable {
     private Label lbl_dado2;
     @FXML
     private Button btn_comecaJogo;
+    @FXML
+    private GridPane gridPaneTabuleiro;
+    
+    //final HBox r1 = new HBox();
+    
+    private Circle pino;
+    private int x, y;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        // TODO
+    
     }    
 
     @FXML
-    private void lancarDados(ActionEvent event) {
+    private void lancarDados(ActionEvent event) {        
+        x = (int)(1 + Math.random() * 6);  // 1 to 6
+        y = (int)(1 + Math.random() * 6);  // 1 to 6
         
+        lbl_dado1.setText(valueOf(x));
+        lbl_dado2.setText(valueOf(y));
+        
+        pino = new Circle(15);
+        pino.setFill(Color.BLUE);
+        gridPaneTabuleiro.add(pino, x-1, y-1);
+
     }
 
     @FXML
     private void comecaJogo(ActionEvent event) {
+
         client.sendToServer("game#start");
     }
   
@@ -103,6 +126,7 @@ public class JogoController implements Initializable {
             }
         });
         readObj.start();
+
     }
     
     private void readString(Object object){

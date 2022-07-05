@@ -7,6 +7,7 @@ package jinx.PreLobby;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import jinx.Jogo.JogoController;
 
 /**
  * FXML Controller class
@@ -51,18 +51,14 @@ public class PreLobbyController implements Initializable {
     }    
 
     @FXML
-    private void entrarJogo(ActionEvent event) throws IOException, InterruptedException {
+    private void entrarJogo(ActionEvent event) throws IOException {
         URL url = new File("src/jinx/Jogo/Jogo.fxml").toURI().toURL();
-        FXMLLoader fxmlloader = new FXMLLoader(url);
-        Parent preLobby = (Parent)fxmlloader.load();
+        Parent jogo = FXMLLoader.load(url);
         
-        JogoController controller = fxmlloader.<JogoController>getController();
-        controller.setValues(txt_ip.getText(), Integer.parseInt(txt_porta.getText()), txt_nome.getText());
-
-        Scene scenePreLobby = new Scene(preLobby);
-
+        Scene sceneJogo = new Scene(jogo);
+        
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scenePreLobby);
+        window.setScene(sceneJogo);
         window.show();
     }
     
