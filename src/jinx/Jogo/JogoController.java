@@ -44,8 +44,6 @@ public class JogoController implements Initializable {
     @FXML
     private ImageView img_tabuleiro;
     @FXML
-    private Label lbl_titulo;
-    @FXML
     private TableColumn<?, ?> tbl_nome;
     @FXML
     private TableColumn<?, ?> tbl_pecas;
@@ -67,6 +65,8 @@ public class JogoController implements Initializable {
     private GridPane gridPaneTabuleiro;
     
     //final HBox r1 = new HBox();
+    @FXML
+    private ImageView img_titulo;
     
     
 

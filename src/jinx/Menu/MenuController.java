@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -29,11 +30,11 @@ import javafx.stage.Stage;
 public class MenuController implements Initializable {
 
     @FXML
-    private Label lbl_titulo;
-    @FXML
     private Button btn_instrucoes;
     @FXML
     private Button btn_sair;
+    @FXML
+    private ImageView img_titulo;
 
     /**
      * Initializes the controller class.
