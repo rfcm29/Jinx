@@ -25,7 +25,8 @@ public class ClientHandler implements Runnable, Serializable{
     private final int ID;
     private String nome;
     private int rondasGanhas;
-    private Peca[] pecas;
+    private int pecas;
+    private Color cor;
     
     private final transient Socket socket;
     private final transient ObjectOutputStream objOut;
@@ -36,12 +37,10 @@ public class ClientHandler implements Runnable, Serializable{
         this.socket = s;
         objIn = new ObjectInputStream(socket.getInputStream());
         objOut = new ObjectOutputStream(socket.getOutputStream());
+        this.cor = cor;
         
         this.rondasGanhas = 0;
-        pecas = new Peca[8];
-        for(int i = 0; i < 8; i++){
-            pecas[i] =  new Peca(cor);
-        }
+        pecas = 9;
     }
     
     public void sendToClient(Object object) throws IOException{
@@ -80,7 +79,46 @@ public class ClientHandler implements Runnable, Serializable{
                 if("start".equals(acao)){
                     Server.comecarJogo();
                 }
+                break;
+            case "dados" :
+                st = new StringTokenizer(acao, "$");
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+                
+                Server.getJogo().movimento(x, y, this);
+                break;
         }
     }
     
+    public Color getCor(){
+        return cor;
+    }
+    
+    public void removePeca(){
+        pecas--;
+    }
+    
+    public void addPeca(){
+        pecas++;
+    }
+    
+    public int numPecas(){
+        return pecas;
+    }
+    
+    public String getNome(){
+        return nome;
+    }
+    
+    public int rondasGanhas(){
+        return rondasGanhas;
+    }
+    
+    public void rondasganhas(){
+        rondasGanhas++;
+    }
+    
+    public void setPecas(int pecas){
+        this.pecas = pecas;
+    }
 }

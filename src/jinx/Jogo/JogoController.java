@@ -36,12 +36,10 @@ import jinx.Server.Jogo.Movimento;
 public class JogoController implements Initializable {
 
     private Client client;
-    
     private Thread readObj;
-    
     private Object object;
-    
     private int ID;
+    private Circle pino;
     
     @FXML
     private ImageView img_tabuleiro;
@@ -70,8 +68,7 @@ public class JogoController implements Initializable {
     
     //final HBox r1 = new HBox();
     
-    private Circle pino;
-    private int x, y;
+    
 
     /**
      * Initializes the controller class.
@@ -84,15 +81,21 @@ public class JogoController implements Initializable {
 
     @FXML
     private void lancarDados(ActionEvent event) {        
-        x = (int)(1 + Math.random() * 6);  // 1 to 6
-        y = (int)(1 + Math.random() * 6);  // 1 to 6
+        int x = (int)(Math.random() * 5);  // 1 to 6
+        int y = (int)(Math.random() * 5);  // 1 to 6
         
-        lbl_dado1.setText(valueOf(x));
-        lbl_dado2.setText(valueOf(y));
         
+        client.sendToServer("dados#" + x + "$" + y);
+        lbl_dado1.setText(valueOf(x + 1));
+        lbl_dado2.setText(valueOf(y + 1));
+        
+        
+        
+        /*
         pino = new Circle(15);
         pino.setFill(Color.BLUE);
-        gridPaneTabuleiro.add(pino, x-1, y-1);
+        gridPaneTabuleiro.add(pino, x, y);
+        */
 
     }
 
@@ -143,6 +146,9 @@ public class JogoController implements Initializable {
                 if("start".equals(acao)){
                     System.out.println("comecar jogo");
                     btn_comecaJogo.setVisible(false);
+                }
+                else if("end".equals(acao)){
+                    //fecha ligaçao
                 }
         }
     }

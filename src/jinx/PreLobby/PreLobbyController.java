@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jinx.Jogo.JogoController;
 
 /**
  * FXML Controller class
@@ -53,13 +54,16 @@ public class PreLobbyController implements Initializable {
     @FXML
     private void entrarJogo(ActionEvent event) throws IOException {
         URL url = new File("src/jinx/Jogo/Jogo.fxml").toURI().toURL();
-        Parent jogo = FXMLLoader.load(url);
-        
-        Scene sceneJogo = new Scene(jogo);
-        
+        FXMLLoader fxmlloader = new FXMLLoader(url);
+        Parent preLobby = (Parent)fxmlloader.load();
+
+        JogoController controller = fxmlloader.<JogoController>getController();
+        controller.setValues(txt_ip.getText(), Integer.parseInt(txt_porta.getText()), txt_nome.getText());
+
+        Scene scenePreLobby = new Scene(preLobby);
+
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneJogo);
+        window.setScene(scenePreLobby);
         window.show();
     }
-    
 }

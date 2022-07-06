@@ -18,15 +18,20 @@ class Casa implements Serializable{
         
     }
     
-    private void setPeca(Peca peca){
+    public void setPeca(Peca peca){
         this.peca = peca;
     }
     
-    private void removePeca(){
+    public void removePeca(){
         this.peca = null;
     }
     
-    private Peca getPeca(){
+    public Peca getPeca(){
         return peca;
+    }
+    
+    public boolean temPeca(){
+        if(peca == null) return false;
+        return true;
     }
 }

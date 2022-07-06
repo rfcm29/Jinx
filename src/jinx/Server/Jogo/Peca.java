@@ -18,4 +18,8 @@ public class Peca implements Serializable{
     public Peca(Color cor) {
         this.cor = cor;
     }
+    
+    public Color getCor(){
+        return cor;
+    }
 }
