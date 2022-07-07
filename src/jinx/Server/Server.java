@@ -5,6 +5,7 @@
  */
 package jinx.Server;
 
+
 import java.awt.Color;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -58,12 +59,12 @@ public class Server {
     
     private void setCores() {
         cores = new Color[6];
-        cores[0] = Color.red;
-        cores[1] = Color.blue;
-        cores[2] = Color.green;
-        cores[3] = Color.gray;
-        cores[4] = Color.orange;
-        cores[5] = Color.yellow;
+        cores[0] = Color.RED;
+        cores[1] = Color.BLUE;
+        cores[2] = Color.GREEN;
+        cores[3] = Color.GRAY;
+        cores[4] = Color.ORANGE;
+        cores[5] = Color.YELLOW;
     }
     
     static void comecarJogo() throws IOException {

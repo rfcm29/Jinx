@@ -11,11 +11,11 @@ import java.io.Serializable;
  *
  * @author rfcm2
  */
-class Casa implements Serializable{
+public class Casa implements Serializable{
     private Peca peca;
-
-    public Casa() {
-        
+    
+    public Casa(Peca peca) {
+      this.peca = peca;
     }
     
     public void setPeca(Peca peca){
@@ -32,6 +32,6 @@ class Casa implements Serializable{
     
     public boolean temPeca(){
         if(peca == null) return false;
-        return true;
+        return peca.getCor() != null;
     }
 }

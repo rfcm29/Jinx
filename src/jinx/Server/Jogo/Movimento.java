@@ -5,22 +5,23 @@
  */
 package jinx.Server.Jogo;
 
+import java.awt.Color;
 import java.io.Serializable;
-
 
 /**
  *
  * @author rfcm2
  */
-public class Movimento implements Serializable{
-    public final Casa[][] tabuleiro;
-    public final int proximo;
-    public final String mensagem;
+public class Movimento implements Serializable {
+    public final int x;
+    public final int y;
+    public final Color cor;
+    public final String acao;
 
-    public Movimento(Casa[][] tabuleiro, int proximo, String mensagem) {
-        this.tabuleiro = tabuleiro;
-        this.proximo = proximo;
-        this.mensagem = mensagem;
+    public Movimento(int x, int y, Color cor, String acao) {
+        this.x = x;
+        this.y = y;
+        this.cor = cor;
+        this.acao = acao;
     }
-    
 }

@@ -14,7 +14,6 @@ import java.net.Socket;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jinx.Server.Jogo.Peca;
 
 /**
  *

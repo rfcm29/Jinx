@@ -8,7 +8,6 @@ package jinx.Server.Jogo;
 import java.io.IOException;
 import java.util.ArrayList;
 import jinx.Server.ClientHandler;
-import jinx.Server.Server;
 
 /**
  *
@@ -22,8 +21,7 @@ public class Jogo {
     public Jogo(ArrayList<ClientHandler> jogadores) throws IOException {
         this.jogadores = jogadores;
         jogadorAtual = 0;
-        tabuleiro = new Casa[5][5];
-        
+        tabuleiro = new Casa[6][6];
         criarTabuleiro();
         comecar();
     }
@@ -32,53 +30,69 @@ public class Jogo {
         for(ClientHandler cl: jogadores){
             cl.sendToClient("game#start");
             cl.sendToClient(jogadores);
-            cl.sendToClient(new Movimento(tabuleiro, jogadorAtual, "Jogo começou"));
+            cl.sendToClient("jogador#" + jogadorAtual);
         }
             
     }
 
     private void criarTabuleiro() {
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 5; j++){
-                tabuleiro[i][j] = new Casa();
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
+                tabuleiro[i][j] = new Casa(null);
             }
         }
     }
     
     public void movimento(int x, int y, ClientHandler jogador) throws IOException{
         if(jogador.numPecas() == 0){
-            for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                    if(tabuleiro[i][j].getPeca().getCor().equals(jogador.getCor())){
-                        tabuleiro[i][j].removePeca();
-                        jogador.addPeca();
+            for(int i = 0; i < 6; i++){
+                for(int j = 0; j < 6; j++){
+                    if(tabuleiro[i][j].temPeca()){
+                        if(tabuleiro[i][j].getPeca().getCor().equals(jogador.getCor())){
+                           System.out.println("remove peca");
+                           tabuleiro[i][j].removePeca();
+                           enviaParaCliente(new Movimento(i, j, null, "remover"));
+                           jogador.addPeca();
+                           
+                        }   
                     }
                 }
             }
-            
-            enviaParaCliente("info#" + jogador.getNome() + ": ficou sem peças para jogar. Todas as suas peças foram removidas do tabuleiro para poder jogar");
+            //enviaParaCliente("info#" + jogador.getNome() + ": ficou sem peças para jogar. Todas as suas peças foram removidas do tabuleiro para poder jogar");
         }
         
         if(tabuleiro[x][y].temPeca()){
             if(tabuleiro[x][y].getPeca().getCor().equals(jogador.getCor())){
-                for(int i = 0; i < 5; i++){
-                    for(int j = 0; j < 5; j++){
-                        if(tabuleiro[i][j].getPeca().getCor().equals(jogador.getCor())){
-                            tabuleiro[i][j].removePeca();
-                            jogador.addPeca();
+                //enviaParaCliente("info#" + jogador.getNome() + ": caiu numa casa com peça sua. As suas peças foram removidas do tabuleiro");
+                proximoJogador();
+                enviaParaCliente("jogador#" + jogadorAtual);
+                enviaParaCliente(jogadores);
+                for(int i = 0; i < 6; i++){
+                    for(int j = 0; j < 6; j++){
+                        if(tabuleiro[i][j].temPeca()){
+                            if(tabuleiro[i][j].getPeca().getCor().equals(jogador.getCor())){
+                                System.out.println("remove peca");
+                                tabuleiro[i][j].removePeca();
+                                enviaParaCliente(new Movimento(i, j, null, "remover"));
+                                jogador.addPeca();
+                            }
                         }
                     }
                 }
-                proximoJogador();
-                enviaParaCliente(jogadores);
-                enviaParaCliente(new Movimento(tabuleiro, jogadorAtual, jogador.getNome() + ": caiu numa casa com peça sua. As suas peças foram removidas do tabuleiro"));
+                //enviaParaCliente(jogadores);
+                
             }
             else{
                 for(ClientHandler cl: jogadores){
                     if(tabuleiro[x][y].getPeca().getCor().equals(cl.getCor())){
                         tabuleiro[x][y].removePeca();
+                        proximoJogador();
+                        enviaParaCliente("jogador#" + jogadorAtual);
+                        enviaParaCliente(jogadores);
+                        enviaParaCliente(new Movimento(x, y, null, "remover"));
                         cl.addPeca();
                         tabuleiro[x][y].setPeca(new Peca(jogador.getCor()));
+                        enviaParaCliente(new Movimento(x, y, jogador.getCor(), "colocar"));
                         jogador.removePeca();
                         
                         boolean jinx = verificaJinx();
@@ -89,13 +103,12 @@ public class Jogo {
                                 return;
                             }
                             resetTabuleiro();
-                            enviaParaCliente(jogadores);
-                            enviaParaCliente(new Movimento(tabuleiro, jogadorAtual, jogador.getNome() + ": ganhou a ronda. é o primeiro a jogar na proxima ronda!"));
+                            //enviaParaCliente(jogadores);
+                            //enviaParaCliente("info#" + jogador.getNome() + ": ganhou a ronda. é o primeiro a jogar na proxima ronda!");
                             return;
                         }
-                        proximoJogador();
-                        enviaParaCliente(jogadores);
-                        enviaParaCliente(new Movimento(tabuleiro, jogadorAtual, jogador.getNome() + ": caiu numa casa de " + cl.getNome() + " e roubou-lhe o lugar na posição: " + x + ", " + y + "."));
+                        //enviaParaCliente(jogadores);
+                        //enviaParaCliente("info#" + jogador.getNome() + ": caiu numa casa de " + cl.getNome() + " e roubou-lhe o lugar na posição: " + (x + 1) + ", " + (y + 1) + ".");
                         return;
                     }
                 }
@@ -111,19 +124,20 @@ public class Jogo {
                     return;
                 }
                 resetTabuleiro();
-                enviaParaCliente(jogadores);
-                enviaParaCliente(new Movimento(tabuleiro, jogadorAtual, jogador.getNome() + ": ganhou a ronda. é o primeiro a jogar na proxima ronda!"));
                 return;
             }
             proximoJogador();
+            enviaParaCliente("jogador#" + jogadorAtual);
             enviaParaCliente(jogadores);
-            enviaParaCliente(new Movimento(tabuleiro, jogadorAtual, jogador.getNome() + ": colocou uma peça na posição: " + x + ", " + y + "."));
+            //enviaParaCliente(jogadores);
+            //enviaParaCliente("info#" + jogador.getNome() + ": colocou uma peça na posição:" + y + " - " + x);
+            enviaParaCliente(new Movimento(x, y, jogador.getCor(), "colocar"));
         }
     }
 
     private boolean verificaJinx() {
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < 5; j++){
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
                 if(verificaHorizontal(i, j))return true;
                 if(verificaVertical(i, j))return true;
                 if(verificaDiagonal(i, j))return true;
@@ -134,72 +148,105 @@ public class Jogo {
     }
 
     private boolean verificaHorizontal(int i, int j) {
-        if(j < 4 && tabuleiro[i][j+1].temPeca() && tabuleiro[i][j+2].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i][j+1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i][j+2].getPeca()){
-                return true;
+        if(j < 4){
+            if(tabuleiro[i][j+1].temPeca() && tabuleiro[i][j+2].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i][j+1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i][j+2].getPeca()){
+                    return true;
+                }
             }
-        } else if(j > 0 && j < 5 && tabuleiro[i][j-1].temPeca() && tabuleiro[i][j+1].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i][j+1].getPeca()){
-                return true;
+        }
+        if(j > 0 && j < 5){
+            if(tabuleiro[i][j-1].temPeca() && tabuleiro[i][j+1].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i][j+1].getPeca()){
+                    return true;
+                }
             }
-        } else if(j > 1 && tabuleiro[i][j-2].temPeca() && tabuleiro[i][j-1].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i][j-2].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i][j-1].getPeca()){
-                return true;
+        }
+        if(j > 1){
+            if(tabuleiro[i][j-2].temPeca() && tabuleiro[i][j-1].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i][j-2].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i][j-1].getPeca()){
+                    return true;
+                }
             }
         }
         return false;
     }
 
     private boolean verificaVertical(int i, int j) {
-        if(i < 4 && tabuleiro[i+1][j].temPeca() && tabuleiro[i+2][j].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+2][j].getPeca()){
-                return true;
+        if(i < 4){
+            if(tabuleiro[i+1][j].temPeca() && tabuleiro[i+2][j].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+2][j].getPeca()){
+                    return true;
+                }
             }
-        } else if(i > 0 && i < 5 && tabuleiro[i-1][j].temPeca() && tabuleiro[i+1][j].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i-1][j].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+1][j].getPeca()){
-                return true;
+        } 
+        if(i > 0 && i < 5){
+            if(tabuleiro[i-1][j].temPeca() && tabuleiro[i+1][j].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i-1][j].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+1][j].getPeca()){
+                    return true;
+                }
             }
-        } else if(i > 1 && tabuleiro[i-2][j].temPeca() && tabuleiro[i-1][j].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i-2][j].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-1][j].getPeca()){
-                return true;
+        }
+        if(i > 1){
+            if(tabuleiro[i-2][j].temPeca() && tabuleiro[i-1][j].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i-2][j].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-1][j].getPeca()){
+                    return true;
+                }
             }
         }
         return false;
     }
 
     private boolean verificaDiagonal(int i, int j) {
-        if(i < 4 && j < 4 && tabuleiro[i+1][j+1].temPeca() && tabuleiro[i+2][j+2].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j+1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+2][j+2].getPeca()){
-                return true;
-            }
-        } else if(i > 0 && i < 5 && j > 0 && j < 5 && tabuleiro[i-1][j-1].temPeca() && tabuleiro[i+1][j+1].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i-1][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+1][j+1].getPeca()){
-                return true;
-            }
-        } else if(i > 1 && j > 1 && tabuleiro[i-2][j-2].temPeca() && tabuleiro[i-1][j-1].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i-2][j-2].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-1][j-1].getPeca()){
-                return true;
-            }
-        } 
-        
-        else if(i < 4 && j > 1 && tabuleiro[i+1][j-1].temPeca() && tabuleiro[i+2][j-2].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+2][j-2].getPeca()){
-                return true;
-            }
-        } else if(i > 0 && i < 5 && j > 0 && j < 5 && tabuleiro[i+1][j-1].temPeca() && tabuleiro[i-1][j+1].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-1][j+1].getPeca()){
-                return true;
-            }
-        } else if(i > 1 && j < 4 && tabuleiro[i+2][j-2].temPeca() && tabuleiro[i+1][j-1].temPeca()){
-            if(tabuleiro[i][j].getPeca() == tabuleiro[i-1][j+2].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-2][j+2].getPeca()){
-                return true;
+        /*
+        if(i < 4 && j < 4){
+            if(tabuleiro[i+1][j+1].temPeca() && tabuleiro[i+2][j+2].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j+1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+2][j+2].getPeca()){
+                    return true;
+                }
             }
         }
+        if(i > 0 && i < 5 && j > 0 && j < 5){
+            if(tabuleiro[i-1][j-1].temPeca() && tabuleiro[i+1][j+1].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i-1][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+1][j+1].getPeca()){
+                    return true;
+                }
+            }
+        }
+        if(i > 1 && j > 1){
+            if(tabuleiro[i-2][j-2].temPeca() && tabuleiro[i-1][j-1].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i-2][j-2].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-1][j-1].getPeca()){
+                    return true;
+                }
+            }
+        }
+        if(i < 4 && j > 1){
+            if(tabuleiro[i+1][j-1].temPeca() && tabuleiro[i+2][j-2].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i+2][j-2].getPeca()){
+                    return true;
+                }
+            }
+        }
+        if(i > 0 && i < 5 && j > 0 && j < 5){
+            if(tabuleiro[i+1][j-1].temPeca() && tabuleiro[i-1][j+1].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i+1][j-1].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-1][j+1].getPeca()){
+                    return true;
+                }
+            }
+        }
+        if(i > 1 && j < 4){
+            if(tabuleiro[i+2][j-2].temPeca() && tabuleiro[i+1][j-1].temPeca()){
+                if(tabuleiro[i][j].getPeca() == tabuleiro[i-1][j+2].getPeca() && tabuleiro[i][j].getPeca() == tabuleiro[i-2][j+2].getPeca()){
+                    return true;
+                }
+            }
+        }
+        */
         return false;
     }
 
     private void proximoJogador() {
-        if(jogadorAtual == 5) jogadorAtual = 0;
+        if(jogadorAtual == (jogadores.size() - 1)) jogadorAtual = 0;
         else jogadorAtual++;
     }
 
